@@ -142,6 +142,13 @@ class TestAccount(unittest.TestCase):
         self.assertEqual(same_account.id, account.id)
         self.assertEqual(same_account.name, account.name)
 
+    def test_repr(self):
+        """It should return a string with account name and ID"""
+        account = AccountFactory()
+        account.create()
+        same_account = Account.find_by_name(account.name)[0]
+        self.assertEqual(same_account.__repr__(), account.__repr__())
+
     def test_serialize_an_account(self):
         """It should Serialize an account"""
         account = AccountFactory()

@@ -167,3 +167,12 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         data = response.get_json()
         self.assertIn("was not found", data["message"])
+
+    def test_list_accounts(self):
+        """It should return a list of accounts even if its empty"""
+        accounts_to_make = random.randint(0,10)
+        accounts = self._create_accounts(accounts_to_make)
+        response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.get_json()
+        self.assertEqual(len(data), accounts_to_make)

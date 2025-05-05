@@ -61,6 +61,7 @@ def create_accounts():
 # LIST ALL ACCOUNTS
 ######################################################################
 
+
 @app.route("/accounts", methods=['GET'])
 def list_accounts():
     """
@@ -68,7 +69,7 @@ def list_accounts():
     This endpoint will list out all accounts, using an empty list
     if no accounts exist
     """
-    app.logger.info(f'Request to list all accounts')
+    app.logger.info('Request to list all accounts')
     accounts = Account.all()
 
     results = [account.serialize() for account in accounts]
@@ -78,6 +79,7 @@ def list_accounts():
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
+
 
 @app.route("/accounts/<int:account_id>", methods=['GET'])
 def read_account(account_id):
@@ -89,14 +91,14 @@ def read_account(account_id):
     account = Account.find(account_id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f'Account with id {account_id} was not found.')
-    
-    app.logger.info(f'Account with id {account_id} found: {account.name}')
-    return account.serialize(), status.HTTP_200_OK    
 
+    app.logger.info(f'Account with id {account_id} found: {account.name}')
+    return account.serialize(), status.HTTP_200_OK
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
+
 
 @app.route("/accounts/<int:account_id>", methods=["PUT"])
 def update_account(account_id):
@@ -108,7 +110,7 @@ def update_account(account_id):
     account = Account.find(account_id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f'Account with id {account_id} was not found.')
-    
+
     account.deserialize(request.get_json())
     account.update()
     app.logger.info(f'Account with id {account_id} updated: {account.name}')

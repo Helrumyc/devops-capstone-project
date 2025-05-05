@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: unbuntu:latest
+    runs-on: unbuntu-latest
     container: python:3.9-slim
 
     services:

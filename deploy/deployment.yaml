@@ -27,17 +27,17 @@ spec:
             value: postgresql
           - name: DATABASE_NAME
             valueFrom:
-            secretKeyRef:
-              name: postgresql
-              key: database-name
+              secretKeyRef:
+                name: postgresql
+                key: database-name
           - name: DATABASE_PASSWORD
             valueFrom:
-            secretKeyRef:
-              name: postgresql
-              key: database-password
+              secretKeyRef:
+                name: postgresql
+                key: database-password
           - name: DATABASE_USER
             valueFrom:
-            secretKeyRef:
-              name: postgresql
-              key: database-user
+              secretKeyRef:
+                name: postgresql
+                key: database-user
 status: {}

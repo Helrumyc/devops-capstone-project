@@ -62,7 +62,7 @@ spec:
     - name: args
       description: The input args used to run nose
       type: string
-      default: "-v --with-spec --spec-color"
+      default: "-v"
     - name: database_uri
       description: database uri to test against
       type: string

@@ -20,7 +20,7 @@ DATABASE_URI = os.getenv(
 )
 
 BASE_URL = "/accounts"
-HTTPS_ENVIRON={'wsgi.ur_shceme': 'https'}
+HTTPS_ENVIRON = {'wsgi.ur_shceme': 'https'}
 
 
 ######################################################################
@@ -160,7 +160,7 @@ class TestAccountService(TestCase):
 
     def test_account_not_found(self):
         """It should return a 404 when an account is not found"""
-        account_id = random.randint(1,50)
+        account_id = random.randint(1, 50)
         response = self.client.get(f'{BASE_URL}/{account_id}')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         data = response.get_json()
@@ -172,9 +172,8 @@ class TestAccountService(TestCase):
         response = self.client.get(f'{BASE_URL}/{account.id}', content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response = self.client.delete(f'{BASE_URL}/{account.id}', content_type='application/json')
-        #self.assertEqual(response.get_json(), "")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-    
+
     def test_update_account(self):
         """It should update an account based on an ID"""
         account = self._create_accounts(1)[0]
@@ -188,7 +187,7 @@ class TestAccountService(TestCase):
 
     def test_update_account_not_found(self):
         """It should return 404 when account not found"""
-        account_id = random.randint(1,50)
+        account_id = random.randint(1, 50)
         response = self.client.put(f'{BASE_URL}/{account_id}', json={})
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         data = response.get_json()
@@ -196,8 +195,8 @@ class TestAccountService(TestCase):
 
     def test_list_accounts(self):
         """It should return a list of accounts even if its empty"""
-        accounts_to_make = random.randint(0,10)
-        accounts = self._create_accounts(accounts_to_make)
+        accounts_to_make = random.randint(0, 10)
+        self._create_accounts(accounts_to_make)
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.get_json()
